@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EmailController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
@@ -36,4 +37,7 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'admin.'], function () {
     Route::put('account', [AccountController::class, 'update'])->name('account.update');
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::post('send-email', [EmailController::class, 'index'])->name('kirim-email');
+    Route::get('cari-email', [EmailController::class, 'cariemail'])->name('get-email');
 });

@@ -14,3 +14,7 @@ Route::group(['middleware' => 'guest:admin'], function () {
     Route::get('register', [AccountController::class, 'register'])->name('register');
     Route::post('register', [AccountController::class, 'store'])->name('register.store');
 });
+
+Route::get('tes', function () {
+    return view('mail.testes');
+});

@@ -14,6 +14,11 @@
                     <td>{{ $order->customer->name }}</td>
                 </tr>
                 <tr>
+                    <td>email</td>
+                    <td class="px-2">:</td>
+                    <td>{{ $order->customer->email }}</td>
+                </tr>
+                <tr>
                     <td>No. Telp</td>
                     <td class="px-2">:</td>
                     <td>{{ $order->no_telp }}</td>
@@ -110,6 +115,11 @@
                     @endif
                 </tbody>
             </table>
+            <form action="{{ route('admin.kirim-email') }}" method="POST">
+                @csrf
+            <button class="btn btn-primary" type="submit">kirim email</button>
+            <input type="text" hidden name="id_order" value="{{ $order->id }}">
+        </form>
         </div>
     </div>
 @endsection
