@@ -40,4 +40,5 @@ Route::group(['middleware' => 'auth:admin', 'as' => 'admin.'], function () {
 
     Route::post('send-email', [EmailController::class, 'index'])->name('kirim-email');
     Route::get('cari-email', [EmailController::class, 'cariemail'])->name('get-email');
+    Route::post('tes-email', [EmailController::class, 'tes'])->name('tes-email');
 });

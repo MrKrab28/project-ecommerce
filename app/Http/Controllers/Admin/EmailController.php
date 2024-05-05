@@ -12,14 +12,26 @@ use App\Models\Order;
 
 class EmailController extends Controller
 {
-    public function kirim(Request $request){
-        // $email = User::find($request->id);
-        // $data = [
-        //     'title' =>'Barang Telah di kirim',
-        //     'url' => 'toystory.com'
-        // ];
-        // Mail::to($email)->send(new sendMail($data));
-        // return 'Berhasil Mengirim Email';
+    public function tes(Request $request){
+
+
+
+
+        $order_id = $request->input('id_order');
+        $order = Order::with('customer', 'items.product')->find($order_id);
+
+        $user_email = $order->customer->email;
+
+
+        $data_email = [
+            'subject' => 'testing',
+            'pengirim' => 'Toys_Store@gmail.com',
+            'order' => $order
+
+
+        ];
+        Mail::to($user_email)->send(new KirimEmail($data_email));
+        return view('mail.testes', $data_email );
     }
 
     public function index(Request $request){
@@ -27,23 +39,16 @@ class EmailController extends Controller
 
         // $user_email = $request->input('email');
         $order_id = $request->input('id_order');
-        $order = Order::with('customer', 'items')->find($order_id);
+        $order = Order::with('customer', 'items.product')->find($order_id);
 
         $user_email = $order->customer->email;
-    $tanggal_pembelian = $order->created_at;
-    $nama_pengguna = $order->customer->name;
-    $produk_dibeli = $order->items->nama_produk;
 
-        $pesan = "<h1>Hai Terimah Kasih Telah Berbelanja Di Toko Kami</h1>";
-        $pesan .= "Barang Pesanan Anda Telah Di Kirim Dan Sedang Dalam Perjalanan";
 
         $data_email = [
             'subject' => 'testing',
             'pengirim' => 'Toys_Store@gmail.com',
-            'isi' => $pesan,
-            'tgl_pembelian' => $tanggal_pembelian,
-            'nama_user' => $nama_pengguna,
-            'produk' => $produk_dibeli
+            'order' => $order
+
 
         ];
         Mail::to($user_email)->send(new KirimEmail($data_email));

@@ -5,117 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="{{ asset('assets/bootstrap-5.3.3-dist/css/bootstrap.min.css') }}" crossorigin="anonymous">
 </head>
 <body>
 
-    <div class="card">
-        <div class="card-body">
-          <div class="container mb-5 mt-3">
-            <div class="row d-flex align-items-baseline">
-              <div class="col-xl-9">
-                <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #123-123</strong></p>
+    <div style="border: 1px solid #dee2e6; border-radius: 0.25rem;">
+        <div style="padding: 1.25rem;">
+          <div style="width: 100%; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto; margin-bottom: 3rem ; margin-top: 1rem ;">
+            <div style="display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px; display: flex ; align-items: baseline ;">
+              <div style="flex: 0 0 75%; max-width: 75%;">
+                <p style="color: #7e8d9f; font-size: 20px;">From >> <strong> {{ $data_email['pengirim'] }}</strong></p>
               </div>
-              <div class="col-xl-3 float-end">
-                <a data-mdb-ripple-init class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
-                    class="fas fa-print text-primary"></i> Print</a>
-                <a data-mdb-ripple-init class="btn btn-light text-capitalize" data-mdb-ripple-color="dark"><i
-                    class="far fa-file-pdf text-danger"></i> Export</a>
+              <div style="flex: 0 0 25%; max-width: 25%; float: right ;">
+
               </div>
               <hr>
             </div>
 
-            <div class="container">
-              <div class="col-md-12">
-                <div class="text-center">
-                  <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
-                  <p class="pt-0">MDBootstrap.com</p>
+            <div style="width: 100%; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto;">
+              <div style="flex: 0 0 100%; max-width: 100%;">
+                <div style="text-align: center ;">
+                  <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ; font-size: 4rem; margin-left: 0 ;"></i>
+                    <h1>Toys Store</h1>
+                    <h3>Terima Kasih Telah Berbelanja Di Toko Kami </h3>
+                    <h5>Barang Pesanan Anda Sedang Dalam Perjalanan</h5>
+                    <h6>Mohon Di Tunggu Yah</h6>
                 </div>
 
               </div>
 
 
-              <div class="row">
-                <div class="col-xl-8">
-                  <ul class="list-unstyled">
-                    <li class="text-muted">To: <span style="color:#5d9fc5 ;">John Lorem</span></li>
-                    <li class="text-muted">Street, City</li>
-                    <li class="text-muted">State, Country</li>
-                    <li class="text-muted"><i class="fas fa-phone"></i> 123-456-789</li>
+              <div style="display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px;">
+                <div style="flex: 0 0 66.666667%; max-width: 66.666667%;">
+                  <ul style="padding-left: 0; list-style: none;">
+                    <li style="color: #6c757d ;">To: <span style="color:#5d9fc5 ;">{{ $order->customer->email}}</span></li>
+                    <li style="color: #6c757d ;">{{ $order->customer->nama }}</li>
+                    <li style="color: #6c757d ;">{{ $order->alamat }}</li>
+                    <li style="color: #6c757d ;"><i class="fas fa-phone"></i> {{ $order->no_telp }}</li>
                   </ul>
                 </div>
-                <div class="col-xl-4">
-                  <p class="text-muted">Invoice</p>
-                  <ul class="list-unstyled">
-                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                        class="fw-bold">ID:</span>#123-456</li>
-                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                        class="fw-bold">Creation Date: </span>Jun 23,2021</li>
-                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                        class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
-                        Unpaid</span></li>
+                {{-- <div style="flex: 0 0 33.333333%; max-width: 33.333333%;">
+                  <p style="color: #6c757d ;">Invoice</p>
+                  <ul style="padding-left: 0; list-style: none;">
+                    <li style="color: #6c757d ;"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                        style="font-weight: bold ;">ID:</span>ODR{{ $order->id }}{{ $order->customer->id }}</li>
+                    <li style="color: #6c757d ;"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                        style="font-weight: bold ;">Tanggal Pengiriman: </span>{{ Carbon\Carbon::parse($order->created_at)->isoFormat('DD MMMM YYYY') }}</li>
+                    <li style="color: #6c757d ;"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                        style="margin-right: 0.25rem ; font-weight: bold ;">Status:</span><span style="background-color: #ffcd39; color: #000 ; font-weight: bold ; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">
+                        {{ $order->status }}</span></li>
                   </ul>
+                </div> --}}
+                <div style="flex: 0 0 33.333333%; max-width: 33.333333%;margin-left:30rem; ">
+                    <p style="color: #6c757d;">Invoice</p>
+                    <ul style="padding-left: 0; list-style: none;margin-top:0">
+                        <li style="color: #6c757d;">
+                            <i class="fas fa-circle" style="color: #84B0CA;"></i>
+                            <span style="font-weight: bold;">ID: ODR{{ $order->id }}{{ $order->customer->id }}</span>
+                        </li>
+                        <li style="color: #6c757d;">
+                            <i class="fas fa-circle" style="color: #84B0CA;"></i>
+                            <span style="font-weight: bold;">Tanggal Pengiriman: {{ Carbon\Carbon::parse($order->created_at)->isoFormat('DD MMMM YYYY') }}</span>
+                        </li>
+                        <li style="color: #6c757d;">
+                            <i class="fas fa-circle" style="color: #84B0CA;"></i>
+                            <span style="font-weight: bold;">Status:</span>
+                            <span style="background-color: #ffcd39; color: #000; font-weight: bold; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">
+                                {{ $order->status }}
+                            </span>
+                        </li>
+                    </ul>
                 </div>
               </div>
 
-              <div class="row my-2 mx-1 justify-content-center">
-                <table class="table table-striped table-borderless">
-                  <thead style="background-color:#84B0CA ;" class="text-white">
+              <div style="margin-top: 0.5rem ; margin-bottom: 0.5rem ; margin-right: 0.25rem ; margin-left: 0.25rem ; justify-content: center ;">
+                <table style="width: 100%; margin-bottom: 1rem; color: #212529; vertical-align: top; border-color: #dee2e6;">
+                  <thead style="background-color:#84B0CA ; color: #fff;">
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Description</th>
+                      <th scope="col">Nama Barang</th>
                       <th scope="col">Qty</th>
-                      <th scope="col">Unit Price</th>
-                      <th scope="col">Amount</th>
+                      <th scope="col">Harga </th>
+                      <th scope="col">Jumlah Harga</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ( $order->items as $item )
+
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Pro Package</td>
-                      <td>4</td>
-                      <td>$200</td>
-                      <td>$800</td>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $item->product->nama }}</td>
+                        <td>{{ $item->qty }}</td>
+                        <td>Rp. {{ number_format($item->product->harga) }}</td>
+                        <td>Rp. {{ number_format($item->total) }}</td>
                     </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Web hosting</td>
-                      <td>1</td>
-                      <td>$10</td>
-                      <td>$10</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Consulting</td>
-                      <td>1 year</td>
-                      <td>$300</td>
-                      <td>$300</td>
-                    </tr>
+
+                    @endforeach
                   </tbody>
 
                 </table>
               </div>
-              <div class="row">
-                <div class="col-xl-8">
-                  <p class="ms-3">Add additional notes and payment information</p>
+              <div style="display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px;">
+                <div style="flex: 0 0 66.666667%; max-width: 66.666667%;">
 
                 </div>
-                <div class="col-xl-3">
-                  <ul class="list-unstyled">
-                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$1110</li>
-                    <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax(15%)</span>$111</li>
-                  </ul>
-                  <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span
-                      style="font-size: 25px;">$1221</span></p>
+                <div style="flex: 0 0 33.333333%; max-width: 33.333333%;margin-left:40rem;">
+
+                  <p style="color: #000 ; float: left ;"><span style="color: #000 ; margin-right: 1rem;">Total Belanja</span><span
+                      style="font-size: 25px;">Rp. {{ number_format($order->total) }}</span></p>
                 </div>
               </div>
               <hr>
-              <div class="row">
-                <div class="col-xl-10">
-                  <p>Thank you for your purchase</p>
+              <div style="display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px;">
+                <div style="flex: 0 0 83.333333%; max-width: 83.333333%;">
                 </div>
-                <div class="col-xl-2">
-                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary text-capitalize"
-                    style="background-color:#60bdf3 ;">Pay Now</button>
+                <div style="flex: 0 0 16.666667%; max-width: 16.666667%;">
                 </div>
               </div>
 
@@ -124,14 +128,7 @@
         </div>
       </div>
 
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-
-
-
-
-
-    <h3>From : {{ $data_email['pengirim'] }}</h3>
-    <h1>Hai </h1>
-    <h1>{!! $data_email['isi'] !!}</h1>
 </body>
 </html>

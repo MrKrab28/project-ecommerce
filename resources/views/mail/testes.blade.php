@@ -14,7 +14,7 @@
           <div class="container mb-5 mt-3">
             <div class="row d-flex align-items-baseline">
               <div class="col-xl-9">
-                <p style="color: #7e8d9f;font-size: 20px;">From >> <strong> Nama Pengirim</strong></p>
+                <p style="color: #7e8d9f;font-size: 20px;">From >> <strong> {{ $pengirim }}</strong></p>
               </div>
               <div class="col-xl-3 float-end">
 
@@ -38,22 +38,22 @@
               <div class="row">
                 <div class="col-xl-8">
                   <ul class="list-unstyled">
-                    <li class="text-muted">To: <span style="color:#5d9fc5 ;">Email Penerima</span></li>
-                    <li class="text-muted">Email Penerima</li>
-                    <li class="text-muted">Alaman</li>
-                    <li class="text-muted"><i class="fas fa-phone"></i> No.Telp</li>
+                    <li class="text-muted">To: <span style="color:#5d9fc5 ;">{{ $order->customer->email}}</span></li>
+                    <li class="text-muted">{{ $order->customer->nama }}</li>
+                    <li class="text-muted">{{ $order->alamat }}</li>
+                    <li class="text-muted"><i class="fas fa-phone"></i> {{ $order->no_telp }}</li>
                   </ul>
                 </div>
                 <div class="col-xl-4">
                   <p class="text-muted">Invoice</p>
                   <ul class="list-unstyled">
                     <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                        class="fw-bold">ID:</span>#123-456</li>
+                        class="fw-bold">ID:</span>ODR{{ $order->id }}{{ $order->customer->id }}</li>
                     <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
-                        class="fw-bold">Creation Date: </span>Jun 23,2021</li>
+                        class="fw-bold">Tanggal Pengiriman: </span>{{ Carbon\Carbon::parse($order->created_at)->isoFormat('DD MMMM YYYY') }}</li>
                     <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
                         class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
-                        Unpaid</span></li>
+                        {{ $order->status }}</span></li>
                   </ul>
                 </div>
               </div>
@@ -63,43 +63,41 @@
                   <thead style="background-color:#84B0CA ;" class="text-white">
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Description</th>
+                      <th scope="col">Nama Barang</th>
                       <th scope="col">Qty</th>
-                      <th scope="col">Unit Price</th>
-                      <th scope="col">Amount</th>
+                      <th scope="col">Harga </th>
+                      <th scope="col">Jumlah Harga</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ( $order->items as $item )
+
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Pro Package</td>
-                      <td>4</td>
-                      <td>$200</td>
-                      <td>$800</td>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $item->product->nama }}</td>
+                        <td>{{ $item->qty }}</td>
+                        <td>Rp. {{ number_format($item->product->harga) }}</td>
+                        <td>Rp. {{ number_format($item->total) }}</td>
                     </tr>
 
+                    @endforeach
                   </tbody>
 
                 </table>
               </div>
               <div class="row">
                 <div class="col-xl-8">
-                  <p class="ms-3">Add additional notes and payment information</p>
 
                 </div>
                 <div class="col-xl-3">
-                  <ul class="list-unstyled">
-                    <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>$1110</li>
-                    <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax(15%)</span>$111</li>
-                  </ul>
-                  <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span
-                      style="font-size: 25px;">$1221</span></p>
+
+                  <p class="text-black float-start"><span class="text-black me-3"> Total Belanja</span><span
+                      style="font-size: 25px;">Rp. {{ number_format($order->total) }}</span></p>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-xl-10">
-                  <p>Thank you for your purchase</p>
                 </div>
                 <div class="col-xl-2">
                 </div>
@@ -109,8 +107,10 @@
           </div>
         </div>
       </div>
-
-
+{{--
+      <h3>From : {{ $data_email['pengirim'] }}</h3>
+      <h1>Hai </h1>
+      <h1>{!! $data_email['isi'] !!}</h1> --}}
 
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

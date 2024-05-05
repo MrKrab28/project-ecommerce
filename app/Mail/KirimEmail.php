@@ -44,7 +44,7 @@ class KirimEmail extends Mailable
     public function build(){
         return $this->subject($this->data_email['subject'])
         ->from($this->data_email['pengirim'])
-        ->view('mail.kirim-email');
+        ->view('mail.kirim-email', $this->data_email);
     }
 
     /**
