@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use App\Models\Cart;
-use App\Models\CartItem;
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\CartItem;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\KirimEmail;
 
 class CartController extends Controller
 {
@@ -19,25 +21,34 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->qty > 10) return redirect()->back()->with('error', 'Limit Belanja Melewati Batas');
         if (auth()->user()->cart) {
+
             $cart = auth()->user()->cart;
         } else {
+
             $cart = new Cart();
             $cart->user_id = auth()->user()->id;
             $cart->save();
         }
-
-        $item = CartItem::where('cart_id', $cart->id)->where('kode_product', $request->product)->first();
-        if ($item) {
-            $item->qty = $item->qty + $request->qty;
-            $item->update();
-        } else {
-            $item = new CartItem();
-            $item->cart_id = $cart->id;
-            $item->kode_product = $request->product;
-            $item->qty = $request->qty;
-            $item->save();
+        $product = Product::find($request->product);
+        if ($cart->items->sum('total') + ($product->harga * $request->qty) <= 1000000) {
+            $item = CartItem::where('cart_id', $cart->id)->where('kode_product', $request->product)->first();
+            if ($item) {
+                $item->qty = $item->qty + $request->qty;
+                $item->update();
+            } else {
+                $item = new CartItem();
+                $item->cart_id = $cart->id;
+                $item->kode_product = $request->product;
+                $item->qty = $request->qty;
+                $item->save();
+            }
+        }else{
+            return redirect()->back()->with('error', 'Harga Belanja Melewati Batas');
         }
+
+
 
 
         return redirect()->back()->with('success', 'Berhasil menambah ke keranjang');
@@ -76,6 +87,21 @@ class CartController extends Controller
         }
 
         auth()->user()->cart->delete();
+         // $user_email = $request->input('email');
+        //  $order_id = $request->input('id_order');
+         $order = Order::with('customer', 'items.product')->find($order->id);
+
+         $user_email = $order->customer->email;
+
+
+         $data_email = [
+             'subject' => 'testing',
+             'pengirim' => 'Toys_Store@gmail.com',
+             'order' => $order
+
+
+         ];
+         Mail::to($user_email)->send(new KirimEmail($data_email, 'Pending'));
 
         return redirect()->route('orders')->with('success', 'Berhasil membuat pesanan');
     }

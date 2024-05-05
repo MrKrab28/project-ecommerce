@@ -115,11 +115,7 @@
                     @endif
                 </tbody>
             </table>
-            <form action="{{ route('admin.kirim-email') }}" method="POST">
-                @csrf
-            <button class="btn btn-primary" type="submit">kirim email</button>
-            <input type="text" hidden name="id_order" value="{{ $order->id }}">
-        </form>
+            
         </div>
     </div>
 @endsection

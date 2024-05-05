@@ -28,8 +28,18 @@
                   <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ; font-size: 4rem; margin-left: 0 ;"></i>
                     <h1>Toys Store</h1>
                     <h3>Terima Kasih Telah Berbelanja Di Toko Kami </h3>
+                    <h5>Barang Berhasil Dipesan</h5>
+                    @if ($status == 'Pending')
+                        @if ($order->payment == 'Transfer')
+                        <h5>Silahkan Transfer Pembayaran Pada Rekening Dibawah ini Dan Lampirkan Bukti Pembayaran Dengan Membalas Email ini</h5>
+                        <h6>BRI : 12312312312132 - ToyStore </h6>
+                        @endif
+
+                    @elseif ($status == 'Dikirim')
                     <h5>Barang Pesanan Anda Sedang Dalam Perjalanan</h5>
-                    <h6>Mohon Di Tunggu Yah</h6>
+
+                    @endif
+
                 </div>
 
               </div>
@@ -71,7 +81,7 @@
                             <i class="fas fa-circle" style="color: #84B0CA;"></i>
                             <span style="font-weight: bold;">Status:</span>
                             <span style="background-color: #ffcd39; color: #000; font-weight: bold; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">
-                                {{ $order->status }}
+                                {{ $status }}
                             </span>
                         </li>
                     </ul>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Mail\KirimEmail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -36,6 +38,19 @@ class OrderController extends Controller
                 break;
 
             case 'proses':
+                $order = Order::with('customer', 'items.product')->find($order->id);
+
+                $user_email = $order->customer->email;
+
+
+                $data_email = [
+                    'subject' => 'testing',
+                    'pengirim' => 'Toys_Store@gmail.com',
+                    'order' => $order
+
+
+                ];
+                Mail::to($user_email)->send(new KirimEmail($data_email, 'Dikirim'));
                 $order->status = "Dikirim";
                 break;
 

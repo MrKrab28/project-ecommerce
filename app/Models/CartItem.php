@@ -22,4 +22,9 @@ class CartItem extends Model
             get: fn () => $this->product->harga * $this->qty
         );
     }
+
+    public function cart(){
+        return $this->belongsTo(Cart::class, 'cart_id');
+
+    }
 }

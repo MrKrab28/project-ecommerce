@@ -28,11 +28,18 @@ class CartItem extends Component
 
     public function increment()
     {
+
         $item = Model::where('cart_id', $this->item->cart_id)->where('kode_product', $this->item->kode_product)->first();
-        if ($item->qty < $item->product->stok) {
-            $item->qty = $item->qty + 1;
-            $item->update();
+        // if($item->cart->total >= 10000000) dd($item->cart->total) ;
+        if($item->cart->items->sum('total') < 1000000) {
+
+            if ($item->qty < $item->product->stok && $item->qty < 10) {
+                $item->qty = $item->qty + 1;
+                $item->update();
+            }
         }
+
+
 
         $this->dispatch('qty-updated');
     }

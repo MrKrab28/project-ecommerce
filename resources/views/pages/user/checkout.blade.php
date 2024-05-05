@@ -60,6 +60,7 @@
                                     <select class="form-select" id="inputPayment" name="payment" required>
                                         <option value="" selected hidden>Select</option>
                                         <option value="Cash on Delivery">Cash on Delivery</option>
+                                        <option value="Transfer">Transfer</option>
                                     </select>
                                 </div>
                                 <div class="order-place">

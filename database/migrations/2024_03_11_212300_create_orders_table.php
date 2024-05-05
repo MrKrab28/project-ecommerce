@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->string('no_telp');
             $table->string('kode_pos');
-            $table->enum('payment', ['Cash on Delivery', 'transfer']);
+            $table->enum('payment', ['Cash on Delivery', 'Transfer']);
             $table->enum('status', ['Pending', 'Proses', 'Dikirim', 'Diterima']);
             $table->timestamps();
 

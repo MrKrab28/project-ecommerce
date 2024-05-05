@@ -13,12 +13,14 @@ class KirimEmail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data_email;
+    public $status;
     /**
      * Create a new message instance.
      */
-    public function __construct($data_email)
+    public function __construct($data_email, $status)
     {
         $this->data_email = $data_email;
+        $this->status = $status;
     }
 
     /**
@@ -44,7 +46,10 @@ class KirimEmail extends Mailable
     public function build(){
         return $this->subject($this->data_email['subject'])
         ->from($this->data_email['pengirim'])
-        ->view('mail.kirim-email', $this->data_email);
+        ->view('mail.kirim-email', [
+            ...$this->data_email,
+            'status' => $this->status
+        ]);
     }
 
     /**
