@@ -45,7 +45,7 @@ class OrderController extends Controller
 
                 $data_email = [
                     'subject' => 'testing',
-                    'pengirim' => 'Toys_Store@gmail.com',
+                    'pengirim' => 'mr.krab2810@gmail.com',
                     'order' => $order
 
 
