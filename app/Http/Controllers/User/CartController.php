@@ -96,7 +96,7 @@ class CartController extends Controller
 
          $data_email = [
              'subject' => 'testing',
-             'pengirim' => 'Toys_Store@gmail.com',
+             'pengirim' => 'andidarmansyah73@gmail.com',
              'order' => $order
 
 

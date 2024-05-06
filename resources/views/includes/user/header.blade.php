@@ -311,9 +311,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#product" class="nav-link">Shop</a>
+                            <a href="{{ route('index') }}#product" class="nav-link">Shop</a>
                         </li>
-                        
+
 
                     </ul>
 
