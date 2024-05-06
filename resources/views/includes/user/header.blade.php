@@ -313,15 +313,7 @@
                         <li class="nav-item">
                             <a href="#product" class="nav-link">Shop</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="blog.html" class="nav-link">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="contact.html" class="nav-link">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Others</a>
-                        </li>
+                        
 
                     </ul>
 

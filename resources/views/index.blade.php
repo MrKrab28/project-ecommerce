@@ -44,7 +44,7 @@
                                         class="text-primary">your
                                         pets</span>
                                 </h2>
-                                <a href="#"
+                                <a href="#product"
                                     class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                                     shop now
                                     <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
@@ -66,7 +66,7 @@
                                         class="text-primary">your
                                         pets</span>
                                 </h2>
-                                <a href="#"
+                                <a href="#product"
                                     class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                                     shop now
                                     <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
@@ -87,7 +87,7 @@
         <h3 class="mb-3">Daftar produk</h3>
     @endif
 
-    <div class="product-grid">
+    <div class="product-grid" id="product">
         <div class="product-wrapper-grid">
             <div class="row">
                 @forelse ($products as $product)
